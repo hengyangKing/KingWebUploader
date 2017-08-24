@@ -1,0 +1,61 @@
+desc 'the musichome专用，可以快速可以对私有库进行升级维护'
+lane :MHPodUploadManager do |options|
+
+tagName = options[:tag]
+log = options[:log]
+podspecName = options[:podspecName]
+#具体该航道的具体行为
+# 1 pod install 
+	#cocoapods(
+	#	clean:true,
+	#	podfile: "./Example/Podfile"
+	#)
+
+# 2 git add .
+	git_add(path:".")
+
+#   git commit -m 'log'
+	git_commit(path:".",message:log)
+
+#   git push origin master 
+	push_to_git_remote(
+		remote:"origin"
+	)
+
+# 3 验证tag是否存在 若存在则删除本地标签和远程标签
+	if git_tag_exists(tag:tagName)
+		UI.message("tagName is exist")
+
+		delete_git_tag(
+			tagName:tagName,
+			deleteLocalTag:true,
+			deleteOriginTag:true
+			)
+	end
+
+# 添加标签  git tag 标签名称
+	add_git_tag(tag:tagName)
+
+ #git push --tags
+	push_git_tags
+
+
+#4  pod spec lint 
+	#pod_lib_lint(
+	#	allow_warnings:true,
+	#	use_libraries:true
+	#)
+
+# pod repo push XXXXX  xxxx.podspec
+	pod_push(
+		path:"#{podspecName}.podspec",repo:"MHPodspecs",
+
+		sources:["https://github.com/CocoaPods/Specs.git","https://git.coding.net/hengyang_King/MusicHomeSpecs.git"],
+
+		allow_warnings:true,
+
+		use_libraries:true
+
+)
+
+end

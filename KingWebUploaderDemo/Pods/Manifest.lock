@@ -1,0 +1,26 @@
+PODS:
+  - GCDWebServer/Core (3.4)
+  - GCDWebServer/WebUploader (3.4):
+    - GCDWebServer/WebUploader/Core (= 3.4)
+  - GCDWebServer/WebUploader/Core (3.4):
+    - GCDWebServer/Core
+  - KingWebUploader (0.0.1):
+    - GCDWebServer/WebUploader
+    - SVProgressHUD
+  - SVProgressHUD (2.1.2)
+
+DEPENDENCIES:
+  - KingWebUploader (from `../`)
+
+EXTERNAL SOURCES:
+  KingWebUploader:
+    :path: ../
+
+SPEC CHECKSUMS:
+  GCDWebServer: 20d53c3181b3c78d865e93e326faf506306f5338
+  KingWebUploader: 39dd40300ed1eb10ff7fd5dc87f27ddc414dfba8
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+
+PODFILE CHECKSUM: 9e153d2dd0b275af48a352e50b56a68f328cfae5
+
+COCOAPODS: 1.1.1
